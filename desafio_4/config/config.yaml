@@ -1,0 +1,81 @@
+# Configuração do Sistema de Processamento VR
+# Versão: 1.0
+# Data: 27/08/2025
+
+# Configurações Gerais
+sistema:
+  nome: "Sistema de Processamento VR"
+  versao: "1.0"
+  ambiente: "producao"
+  
+# Configurações de Arquivos
+arquivos:
+  diretorio_entrada: "./dados_entrada/"
+  diretorio_saida: "./dados_saida/"
+  diretorio_logs: "./logs/"
+  template_saida: "VR_MENSAL_{competencia}.xlsx"
+  
+# Mapeamento de Arquivos de Entrada
+arquivos_entrada:
+  ativos: "ATIVOS.xlsx"
+  admissoes: "ADMISSÃO ABRIL.xlsx"
+  afastamentos: "AFASTAMENTOS.xlsx"
+  aprendizes: "APRENDIZ.xlsx"
+  dias_uteis: "Base dias uteis.xlsx"
+  sindicato_valor: "Base sindicato x valor.xlsx"
+  desligados: "DESLIGADOS.xlsx"
+  estagios: "ESTÁGIO.xlsx"
+  exterior: "EXTERIOR.xlsx"
+  ferias: "FÉRIAS.xlsx"
+  template_vr: "VR MENSAL 05.2025.xlsx"
+  
+# Regras de Negócio
+regras_negocio:
+  dia_corte_desligamento: 15
+  percentual_empresa: 0.80
+  percentual_colaborador: 0.20
+  competencia_referencia: "2025-05"
+  
+# Cargos Excluídos (atualizável conforme necessidade)
+exclusoes:
+  cargos_nao_elegiveis:
+    - "APRENDIZ"
+    - "ESTAGIARIO"
+    - "DIRETOR"
+    - "DIRETOR EXECUTIVO"
+    - "PRESIDENTE"
+    - "VICE-PRESIDENTE"
+  
+  tipos_afastamento_excluidos:
+    - "Licença Maternidade"
+    - "Auxílio Doença"
+    - "Licença Paternidade"
+    - "Afastamento INSS"
+    
+# Mapeamento de Sindicatos (normalização de nomes)
+mapeamento_sindicatos:
+  "SINDPD SP - SIND.TRAB.EM PROC DADOS E EMPR.EMPRESAS PROC DADOS ESTADO DE SP.": "São Paulo"
+  "SINDPPD RS - SINDICATO DOS TRAB. EM PROC. DE DADOS RIO GRANDE DO SUL": "Rio Grande do Sul"
+  "SINDPD RJ - SINDICATO PROFISSIONAIS DE PROC DADOS DO RIO DE JANEIRO": "Rio de Janeiro"
+  "SITEPD PR - SIND DOS TRAB EM EMPR PRIVADAS DE PROC DE DADOS DE CURITIBA E REGIAO METROPOLITANA": "Paraná"
+    
+# Configurações de Log
+logging:
+  nivel: "INFO"
+  arquivo_log: "processamento_vr_{timestamp}.log"
+  arquivo_auditoria: "auditoria_vr_{timestamp}.txt"
+  formato: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+# Validações
+validacoes:
+  valor_minimo_vr: 10.00
+  valor_maximo_vr: 100.00
+  dias_uteis_minimo: 15
+  dias_uteis_maximo: 25
+  
+# Configurações de Performance
+performance:
+  chunk_size: 1000
+  max_memory_usage: "512MB"
+  enable_cache: true
+
